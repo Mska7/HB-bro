@@ -1,15 +1,70 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Днем Рождения!</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Поздравление.exe</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="desktop">
+    <!-- Главное окно -->
+    <div class="window main-window">
+      <div class="title-bar">
+        <div class="title-left">
+          <span class="title-icon">🎭</span>
+          <span class="title-text">Поздравление.exe</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn" aria-label="Свернуть">_</button>
+          <button class="win-btn" aria-label="Развернуть">□</button>
+          <button class="win-btn win-close" aria-label="Закрыть">×</button>
+        </div>
+      </div>
 
-    <!-- Здесь будет твой контент -->
+      <div class="menu-bar">
+        <span>Файл</span>
+        <span>Правка</span>
+        <span>Вид</span>
+        <span>Справка</span>
+      </div>
 
-    <script src="script.js"></script>
+      <div class="window-body">
+        <div class="content-box">
+          <h1>Шоу продолжается: 30 лет!</h1>
+          <p>
+            Поздравляю, бро! За твоими плечами тысячи детских улыбок, литры грима и тонны неиссякаемой энергии. Ты — легенда аниматорства, но даже у супергероев иногда ноет спина после долгих смен. Сейчас в SkyLing ты стал настоящим гуру переговоров, но мы-то знаем, что внутри тебя все еще живет тот самый человек, который может рассмешить любого. 30 лет — это когда ты по-прежнему душа компании, но лучший спецэффект для тебя теперь — это тихий вечер и возможность выспаться. Продолжай зажигать, но не забывай про отдых!
+          </p>
+        </div>
+
+        <div class="button-row">
+          <button id="partyBtn" class="retro-button">Включить праздничный режим</button>
+          <button id="okBtn" class="retro-button">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Модальное диалоговое окно -->
+    <div id="modal" class="window modal-window">
+      <div class="title-bar modal-title-bar">
+        <div class="title-left">
+          <span class="title-icon">💾</span>
+          <span class="title-text">Системное сообщение</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn" aria-label="Свернуть">_</button>
+          <button class="win-btn" aria-label="Развернуть">□</button>
+          <button class="win-btn win-close" aria-label="Закрыть">×</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>🎉 С 30-летием, легенда! Желаю сил, смеха и побольше тихих вечеров!</p>
+        <button id="modalOk" class="retro-button">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confetti"></canvas>
+  <script src="script.js"></script>
 </body>
 </html>
