@@ -14,6 +14,10 @@ html, body {
   overflow: hidden;
 }
 
+body {
+  padding-bottom: 40px;
+}
+
 .desktop {
   position: relative;
   width: 100%;
@@ -22,6 +26,47 @@ html, body {
   align-items: center;
   justify-content: center;
   background-color: #008080;
+}
+
+/* Иконки рабочего стола */
+.desktop-icons {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  z-index: 1;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 72px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.desktop-icon svg {
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  margin-bottom: 4px;
+}
+
+.desktop-icon span {
+  font-size: 11px;
+  line-height: 1.2;
+  color: #ffffff;
+  text-shadow: 1px 1px 0 #000000;
+  padding: 2px 4px;
+}
+
+.desktop-icon:hover span {
+  background-color: #000080;
 }
 
 /* Общий стиль окна Windows 95 */
@@ -41,6 +86,86 @@ html, body {
   width: 620px;
   max-width: 92vw;
   z-index: 10;
+}
+
+/* Панель задач Windows 95 */
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 36px;
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px;
+  z-index: 200;
+}
+
+.start-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 8px;
+  font-family: "MS Sans Serif", "Arial", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #c0c0c0;
+  color: #000000;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  cursor: pointer;
+  outline: none;
+}
+
+.start-btn:active {
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+
+.start-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.taskbar-tray {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 10px;
+  background-color: #c0c0c0;
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+
+.speaker-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.clock {
+  font-family: "MS Sans Serif", "Arial", sans-serif;
+  font-size: 12px;
+  color: #000000;
+  min-width: 34px;
+  text-align: center;
 }
 
 /* Заголовок окна */
@@ -201,7 +326,7 @@ html, body {
   transform: translate(-50%, -50%);
   width: 360px;
   max-width: 88vw;
-  z-index: 100;
+  z-index: 250;
 }
 
 .modal-title-bar {
@@ -234,7 +359,7 @@ canvas#confetti {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 50;
+  z-index: 60;
 }
 
 /* Адаптивность для мобильных устройств 375px-450px */
@@ -308,6 +433,55 @@ canvas#confetti {
     font-size: 13px;
     margin-bottom: 14px;
   }
+
+  .desktop-icons {
+    top: 8px;
+    left: 8px;
+    gap: 14px;
+  }
+
+  .desktop-icon {
+    width: 56px;
+  }
+
+  .desktop-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .desktop-icon span {
+    font-size: 9px;
+  }
+
+  .taskbar {
+    height: 34px;
+    padding: 2px;
+  }
+
+  .start-btn {
+    height: 26px;
+    padding: 0 6px;
+    font-size: 11px;
+  }
+
+  .start-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .taskbar-tray {
+    height: 26px;
+    padding: 0 8px;
+  }
+
+  .speaker-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .clock {
+    font-size: 11px;
+  }
 }
 
 /* Очень маленькие экраны */
@@ -329,5 +503,33 @@ canvas#confetti {
   .button-row {
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .desktop-icons {
+    display: none;
+  }
+
+  .taskbar {
+    height: 32px;
+  }
+
+  .start-btn {
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .taskbar-tray {
+    height: 24px;
+    padding: 0 6px;
+    gap: 6px;
+  }
+
+  .clock {
+    font-size: 10px;
+  }
+
+  .speaker-icon {
+    width: 12px;
+    height: 12px;
   }
 }
