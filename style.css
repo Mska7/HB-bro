@@ -69,6 +69,26 @@ body {
   background-color: #000080;
 }
 
+/* Праздничные элементы иконок */
+.festive-decoration {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.desktop-icon.festive .festive-decoration {
+  opacity: 1;
+}
+
+.desktop-icon.festive svg {
+  animation: festive-bounce 0.45s ease-in-out;
+}
+
+@keyframes festive-bounce {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-3px); }
+  75% { transform: translateY(2px); }
+}
+
 /* Общий стиль окна Windows 95 */
 .window {
   background-color: #c0c0c0;
@@ -310,11 +330,17 @@ body {
   outline: none;
 }
 
+.retro-button:hover {
+  background-color: #d4d4d4;
+}
+
 .retro-button:active {
   border-top: 2px solid #404040;
   border-left: 2px solid #404040;
   border-right: 2px solid #ffffff;
   border-bottom: 2px solid #ffffff;
+  background-color: #b8b8b8;
+  transform: translateY(1px);
 }
 
 /* Модальное окно */
@@ -351,6 +377,16 @@ body {
   display: none;
 }
 
+/* Модальные окна иконок рабочего стола */
+.icon-modal {
+  width: 340px;
+  max-width: 86vw;
+}
+
+.icon-modal .modal-body p {
+  min-height: 44px;
+}
+
 /* Конфетти */
 canvas#confetti {
   position: fixed;
@@ -369,17 +405,20 @@ canvas#confetti {
   }
 
   .main-window {
-    width: 100%;
-    max-width: calc(100vw - 16px);
+    width: auto;
+    max-width: 90vw;
   }
 
-  .modal-window {
-    width: 100%;
-    max-width: calc(100vw - 24px);
+  .modal-window,
+  .icon-modal {
+    width: auto;
+    max-width: 90vw;
   }
 
   .window-body {
     padding: 10px;
+    max-height: 70vh;
+    overflow-y: auto;
   }
 
   .content-box {
@@ -388,13 +427,22 @@ canvas#confetti {
   }
 
   .content-box h1 {
-    font-size: 17px;
+    font-size: 16px;
     margin-bottom: 10px;
   }
 
   .content-box p {
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .modal-body {
+    padding: 14px;
+  }
+
+  .modal-body p {
+    font-size: 12px;
+    margin-bottom: 12px;
   }
 
   .button-row {
@@ -404,9 +452,14 @@ canvas#confetti {
   }
 
   .retro-button {
-    min-width: 80px;
-    padding: 8px 12px;
-    font-size: 12px;
+    min-width: 70px;
+    padding: 6px 10px;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  #partyBtn {
+    order: -1;
   }
 
   .title-bar {
