@@ -134,6 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (m && m !== modalEl) m.style.display = 'none';
     });
     modalEl.style.display = 'block';
+    // Сбрасываем корзину при каждом открытии
+    if (modalEl === iconModals.makeup) {
+      resetBinModal();
+    }
   }
 
   function closeIconModal(modalEl) {
@@ -197,12 +201,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById(`modal-${key}-close`);
 
     if (okBtn) {
-      okBtn.addEventListener('click', () => closeIconModal(modalEl));
+      okBtn.addEventListener('click', () => {
+        closeIconModal(modalEl);
+        if (key === 'makeup') resetBinModal();
+      });
     }
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => closeIconModal(modalEl));
+      closeBtn.addEventListener('click', () => {
+        closeIconModal(modalEl);
+        if (key === 'makeup') resetBinModal();
+      });
     }
   });
+
+  // Кнопка "Запустить режим 'Взрослый'" в окне "Склад баек"
+  const adultModeBtn = document.getElementById('adult-mode-btn');
+  if (adultModeBtn) {
+    adultModeBtn.addEventListener('click', () => {
+      alert("Внимание: Режим 'Аниматор' отключен. Включен режим 'Лежание на диване'");
+    });
+  }
+
+  // Логика окна "Утилизация нервных клеток"
+  const binConfirm = document.getElementById('bin-confirm');
+  const binResult = document.getElementById('bin-result');
+  const binResultText = document.getElementById('bin-result-text');
+  const binYes = document.getElementById('bin-yes');
+  const binNo = document.getElementById('bin-no');
+
+  function resetBinModal() {
+    if (binConfirm) binConfirm.style.display = 'block';
+    if (binResult) binResult.style.display = 'none';
+  }
+
+  if (binYes) {
+    binYes.addEventListener('click', () => {
+      if (binResultText) binResultText.textContent = 'Ошибка: Данные нельзя удалить. Слишком много эпичных историй в системе!';
+      if (binConfirm) binConfirm.style.display = 'none';
+      if (binResult) binResult.style.display = 'block';
+    });
+  }
+
+  if (binNo) {
+    binNo.addEventListener('click', () => {
+      if (binResultText) binResultText.textContent = 'Верное решение. Твоя харизма — единственный файл, который не подлежит удалению';
+      if (binConfirm) binConfirm.style.display = 'none';
+      if (binResult) binResult.style.display = 'block';
+    });
+  }
 
   // Модальное окно скрыто по умолчанию через CSS
 });

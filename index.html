@@ -30,7 +30,7 @@
             <rect x="10" y="32" width="4" height="4" fill="#00ff00"/>
           </g>
         </svg>
-        <span>Мой компьютер</span>
+        <span>Конфигурация 30.0</span>
       </div>
       <div class="desktop-icon" data-icon="makeup">
         <svg viewBox="0 0 48 48" aria-hidden="true">
@@ -50,7 +50,7 @@
             <rect x="6" y="30" width="4" height="4" fill="#ff0000"/>
           </g>
         </svg>
-        <span>Корзина</span>
+        <span>Утилизация нервных клеток</span>
       </div>
       <div class="desktop-icon" data-icon="clapper">
         <svg viewBox="0 0 48 48" aria-hidden="true">
@@ -72,7 +72,7 @@
             <polygon points="24,4 26,0 28,4 26,8" fill="#ff00ff"/>
           </g>
         </svg>
-        <span>Папка</span>
+        <span>Склад баек</span>
       </div>
       <div id="greetingIcon" class="desktop-icon">
         <svg viewBox="0 0 48 48" aria-hidden="true">
@@ -149,53 +149,72 @@
       </div>
     </div>
 
-    <!-- Окно: Телевизор (Шоу) -->
+    <!-- Окно: Конфигурация 30.0 -->
     <div id="modal-tv" class="window modal-window icon-modal">
       <div class="title-bar modal-title-bar">
         <div class="title-left">
-          <span class="title-icon">📺</span>
-          <span class="title-text">Шоу</span>
+          <span class="title-icon">⚙️</span>
+          <span class="title-text">Конфигурация 30.0</span>
         </div>
         <div class="window-controls">
           <button id="modal-tv-close" class="win-btn win-close" aria-label="Закрыть">×</button>
         </div>
       </div>
-      <div class="modal-body">
-        <p>Трансляция временно недоступна, все ушли на обед!</p>
+      <div class="modal-body config-body">
+        <ul class="spec-list">
+          <li><strong>Процессор:</strong> Опыт работы с детьми — 100% стабильности (но иногда требует перезагрузки).</li>
+          <li><strong>Оперативная память:</strong> Запоминает все сценарии, но забывает, где ключи.</li>
+          <li><strong>Видеокарта:</strong> Выдает искреннюю улыбку даже после 5-часовой смены.</li>
+          <li><strong>Статус:</strong> Версия 30.0 успешно установлена. Новые функции: «Воспринимать шум как белый фон» и «Ложиться спать до полуночи».</li>
+        </ul>
         <button id="modal-tv-ok" class="retro-button">OK</button>
       </div>
     </div>
 
-    <!-- Окно: Кейс (Архив) -->
+    <!-- Окно: Утилизация нервных клеток -->
     <div id="modal-makeup" class="window modal-window icon-modal">
       <div class="title-bar modal-title-bar">
         <div class="title-left">
-          <span class="title-icon">💄</span>
-          <span class="title-text">Архив</span>
+          <span class="title-icon">🗑️</span>
+          <span class="title-text">Утилизация нервных клеток</span>
         </div>
         <div class="window-controls">
           <button id="modal-makeup-close" class="win-btn win-close" aria-label="Закрыть">×</button>
         </div>
       </div>
       <div class="modal-body">
-        <p>Здесь хранятся только лучшие шутки за 30 лет!</p>
-        <button id="modal-makeup-ok" class="retro-button">OK</button>
+        <div id="bin-confirm">
+          <p>Вы уверены, что хотите удалить 30 лет опыта аниматора?</p>
+          <div class="button-row">
+            <button id="bin-yes" class="retro-button">Да</button>
+            <button id="bin-no" class="retro-button">Нет</button>
+          </div>
+        </div>
+        <div id="bin-result" style="display: none;">
+          <p id="bin-result-text"></p>
+          <button id="modal-makeup-ok" class="retro-button">OK</button>
+        </div>
       </div>
     </div>
 
-    <!-- Окно: Хлопушка (Сценарии) -->
+    <!-- Окно: Склад баек -->
     <div id="modal-clapper" class="window modal-window icon-modal">
       <div class="title-bar modal-title-bar">
         <div class="title-left">
-          <span class="title-icon">🎬</span>
-          <span class="title-text">Сценарии</span>
+          <span class="title-icon">📁</span>
+          <span class="title-text">Склад баек</span>
         </div>
         <div class="window-controls">
           <button id="modal-clapper-close" class="win-btn win-close" aria-label="Закрыть">×</button>
         </div>
       </div>
-      <div class="modal-body">
-        <p>Сценарий идеального праздника: много еды, мягкий диван и отсутствие звонков!</p>
+      <div class="modal-body jokes-body">
+        <ul class="jokes-list">
+          <li>"30 лет — это когда уже не ты кричишь в микрофон, чтобы расшевелить толпу, а ищешь стул, чтобы посидеть в тишине".</li>
+          <li>"Системное предупреждение: Уровень 'Активный аниматор' низок. Требуется кофе и отсутствие детского смеха в радиусе 10 км".</li>
+          <li>"Ты официально стал тем человеком, который на празднике стоит у стены и оценивает работу ведущего".</li>
+        </ul>
+        <button id="adult-mode-btn" class="retro-button">Запустить режим "Взрослый"</button>
         <button id="modal-clapper-ok" class="retro-button">OK</button>
       </div>
     </div>

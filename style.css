@@ -586,3 +586,28 @@ canvas#confetti {
     height: 12px;
   }
 }
+
+/* Списки в окнах "Склад баек" и "Конфигурация 30.0" */
+.jokes-list,
+.spec-list {
+  text-align: left;
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.jokes-list li,
+.spec-list li {
+  margin-bottom: 10px;
+}
+
+/* Кнопки в модальных окнах иконок центрируем */
+.modal-body .button-row {
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.jokes-body .retro-button {
+  margin: 0 5px;
+}
