@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Холм Bliss как декоративный элемент снизу -->
+  <div class="hill" aria-hidden="true"></div>
+
   <div class="desktop">
     <!-- Иконки рабочего стола -->
     <div class="desktop-icons">
@@ -222,24 +225,47 @@
 
   <canvas id="confetti"></canvas>
 
-  <!-- Панель задач Windows 95 -->
+  <!-- Панель задач Windows XP -->
   <div class="taskbar">
-    <button class="start-btn" type="button">
-      <svg class="start-icon" viewBox="0 0 16 16" aria-hidden="true">
-        <rect x="0" y="0" width="7" height="7" fill="#ff0000"/>
-        <rect x="8" y="0" width="7" height="7" fill="#00ff00"/>
-        <rect x="0" y="8" width="7" height="7" fill="#0000ff"/>
-        <rect x="8" y="8" width="7" height="7" fill="#ffff00"/>
-      </svg>
-      <span>Пуск</span>
-    </button>
+    <div class="taskbar-left">
+      <button class="start-btn" type="button">
+        <span>Пуск</span>
+      </button>
+      <div class="mascot-wrap">
+        <div class="mascot-bubble" aria-hidden="true">С Днем рождения!</div>
+        <svg class="mascot" viewBox="0 0 32 32" aria-hidden="true">
+          <!-- Тень -->
+          <rect x="6" y="28" width="20" height="4" fill="#1a3c6e" opacity="0.5"/>
+          <!-- Ноги -->
+          <rect x="9" y="24" width="5" height="6" fill="#2d2d2d"/>
+          <rect x="18" y="24" width="5" height="6" fill="#2d2d2d"/>
+          <!-- Тело (футболка аниматора) -->
+          <rect x="8" y="14" width="16" height="12" fill="#ff6600"/>
+          <!-- Руки -->
+          <rect x="4" y="16" width="4" height="8" fill="#ffcc99"/>
+          <rect x="24" y="16" width="4" height="8" fill="#ffcc99"/>
+          <!-- Голова -->
+          <rect x="10" y="6" width="12" height="12" fill="#ffcc99"/>
+          <!-- Волосы -->
+          <rect x="10" y="4" width="12" height="4" fill="#8b4513"/>
+          <!-- Праздничный колпак -->
+          <polygon points="16,2 12,8 20,8" fill="#ff0000"/>
+          <rect x="14" y="8" width="4" height="2" fill="#ffff00"/>
+          <!-- Глаза -->
+          <rect x="12" y="10" width="2" height="2" fill="#000000"/>
+          <rect x="18" y="10" width="2" height="2" fill="#000000"/>
+          <!-- Улыбка -->
+          <rect x="14" y="14" width="4" height="2" fill="#000000"/>
+        </svg>
+      </div>
+    </div>
     <div class="taskbar-tray">
       <svg class="speaker-icon" viewBox="0 0 16 16" aria-hidden="true">
         <polygon points="2,5 6,5 10,1 10,15 6,11 2,11" fill="#404040"/>
         <path d="M12 4 Q16 8 12 12" stroke="#404040" stroke-width="2" fill="none"/>
         <path d="M14 2 Q20 8 14 14" stroke="#404040" stroke-width="2" fill="none"/>
       </svg>
-      <span class="clock">16:14</span>
+      <span class="clock">02:40</span>
     </div>
   </div>
 

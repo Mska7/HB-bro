@@ -9,13 +9,26 @@ html, body {
   height: 100%;
   font-family: "MS Sans Serif", "Arial", sans-serif;
   font-size: 14px;
-  background-color: #008080;
+  background-color: #688dc8;
   color: #000000;
   overflow: hidden;
 }
 
 body {
   padding-bottom: 40px;
+}
+
+/* Декоративный холм Bliss, приклеенный к низу экрана */
+.hill {
+  position: fixed;
+  bottom: 36px;
+  left: 0;
+  width: 100%;
+  height: 38vh;
+  background: url('bliss-hill.png') no-repeat center bottom;
+  background-size: cover;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .desktop {
@@ -25,7 +38,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #008080;
+  background-color: transparent;
+  z-index: 1;
 }
 
 /* Иконки рабочего стола */
@@ -63,6 +77,10 @@ body {
   color: #ffffff;
   text-shadow: 1px 1px 0 #000000;
   padding: 2px 4px;
+  word-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+  width: 80px;
 }
 
 .desktop-icon:hover span {
@@ -89,16 +107,18 @@ body {
   75% { transform: translateY(2px); }
 }
 
-/* Общий стиль окна Windows 95 */
+/* Общий стиль окна Windows XP */
 .window {
-  background-color: #c0c0c0;
+  background: rgba(236, 233, 216, 0.9);
   border-top: 2px solid #ffffff;
   border-left: 2px solid #ffffff;
   border-right: 2px solid #808080;
   border-bottom: 2px solid #808080;
+  border-radius: 6px;
   box-shadow:
     inset -1px -1px #000000,
-    inset 1px 1px #dfdfdf;
+    inset 1px 1px #dfdfdf,
+    2px 2px 10px rgba(0, 0, 0, 0.25);
 }
 
 /* Главное окно */
@@ -108,23 +128,27 @@ body {
   z-index: 10;
 }
 
-/* Панель задач Windows 95 */
+/* Панель задач Windows XP */
 .taskbar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 36px;
-  background-color: #c0c0c0;
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #404040;
-  border-bottom: 2px solid #404040;
+  background: linear-gradient(180deg, #3f6feb 0%, #245edb 15%, #245edb 100%);
+  border-top: 1px solid #4e8de3;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 2px 4px;
   z-index: 200;
+}
+
+.taskbar-left {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 100%;
 }
 
 .start-btn {
@@ -136,21 +160,82 @@ body {
   font-family: "MS Sans Serif", "Arial", sans-serif;
   font-size: 12px;
   font-weight: bold;
-  background-color: #c0c0c0;
-  color: #000000;
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #404040;
-  border-bottom: 2px solid #404040;
+  background: linear-gradient(180deg, #5ba853 0%, #3d8b3d 100%);
+  color: #ffffff;
+  border: 1px solid #2f6b2f;
+  border-radius: 6px;
   cursor: pointer;
   outline: none;
 }
 
 .start-btn:active {
-  border-top: 2px solid #404040;
-  border-left: 2px solid #404040;
-  border-right: 2px solid #ffffff;
-  border-bottom: 2px solid #ffffff;
+  background: linear-gradient(180deg, #3d8b3d 0%, #5ba853 100%);
+}
+
+/* Пиксельный персонаж-аниматор на панели задач */
+.mascot-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.mascot {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 28px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mascot.jump {
+  animation: mascot-jump 0.5s ease;
+}
+
+@keyframes mascot-jump {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-16px); }
+  60% { transform: translateY(0); }
+}
+
+.mascot-bubble {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  max-width: 80vw;
+  padding: 8px 12px;
+  background: #ffffcc;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #000000;
+  text-align: center;
+  white-space: nowrap;
+  word-wrap: break-word;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateX(-50%) scale(0.8) translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.mascot-bubble.show {
+  opacity: 1;
+  transform: translateX(-50%) scale(1) translateY(0);
+}
+
+.mascot-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: #ffffcc transparent transparent transparent;
 }
 
 .start-icon {
@@ -166,11 +251,9 @@ body {
   gap: 8px;
   height: 28px;
   padding: 0 10px;
-  background-color: #c0c0c0;
-  border-top: 2px solid #808080;
-  border-left: 2px solid #808080;
-  border-right: 2px solid #ffffff;
-  border-bottom: 2px solid #ffffff;
+  background-color: rgba(15, 66, 175, 0.4);
+  border: 1px solid #1c5bd0;
+  border-radius: 4px;
 }
 
 .speaker-icon {
@@ -178,12 +261,13 @@ body {
   height: 16px;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  filter: brightness(0) invert(1);
 }
 
 .clock {
   font-family: "MS Sans Serif", "Arial", sans-serif;
   font-size: 12px;
-  color: #000000;
+  color: #ffffff;
   min-width: 34px;
   text-align: center;
 }
@@ -195,11 +279,12 @@ body {
   justify-content: space-between;
   height: 28px;
   padding: 2px 4px;
-  background: linear-gradient(90deg, #000080, #1084d0);
+  background: linear-gradient(180deg, #3d95ff 0%, #0058e6 15%, #0058e6 100%);
   color: #ffffff;
   font-weight: bold;
   font-size: 13px;
   letter-spacing: 0.2px;
+  border-radius: 6px 6px 0 0;
 }
 
 .title-left {
@@ -260,8 +345,8 @@ body {
   display: flex;
   gap: 18px;
   padding: 4px 8px;
-  background-color: #c0c0c0;
-  border-bottom: 1px solid #808080;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.4);
   font-size: 13px;
 }
 
@@ -320,12 +405,13 @@ body {
   font-family: "MS Sans Serif", "Arial", sans-serif;
   font-size: 13px;
   font-weight: normal;
-  background-color: #c0c0c0;
+  background-color: rgba(236, 233, 216, 0.95);
   color: #000000;
   border-top: 2px solid #ffffff;
   border-left: 2px solid #ffffff;
-  border-right: 2px solid #404040;
-  border-bottom: 2px solid #404040;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  border-radius: 4px;
   cursor: pointer;
   outline: none;
 }
@@ -356,7 +442,8 @@ body {
 }
 
 .modal-title-bar {
-  background: linear-gradient(90deg, #000080, #1084d0);
+  background: linear-gradient(180deg, #3d95ff 0%, #0058e6 15%, #0058e6 100%);
+  border-radius: 6px 6px 0 0;
 }
 
 .modal-body {
@@ -413,6 +500,10 @@ canvas#confetti {
   .icon-modal {
     width: auto;
     max-width: 90vw;
+  }
+
+  .hill {
+    height: 28vh;
   }
 
   .window-body {
@@ -517,6 +608,17 @@ canvas#confetti {
     font-size: 11px;
   }
 
+  .mascot {
+    width: 26px;
+    height: 26px;
+    margin-bottom: 24px;
+  }
+
+  .mascot-bubble {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
   .start-icon {
     width: 14px;
     height: 14px;
@@ -544,6 +646,10 @@ canvas#confetti {
     max-width: calc(100vw - 12px);
   }
 
+  .hill {
+    height: 24vh;
+  }
+
   .content-box h1 {
     font-size: 16px;
   }
@@ -569,6 +675,17 @@ canvas#confetti {
   .start-btn {
     height: 24px;
     font-size: 10px;
+  }
+
+  .mascot {
+    width: 22px;
+    height: 22px;
+    margin-bottom: 22px;
+  }
+
+  .mascot-bubble {
+    font-size: 10px;
+    padding: 5px 8px;
   }
 
   .taskbar-tray {
@@ -610,4 +727,23 @@ canvas#confetti {
 
 .jokes-body .retro-button {
   margin: 0 5px;
+}
+
+/* Кастомное alert-окно Windows 95 */
+.win95-alert {
+  z-index: 300;
+}
+
+
+/* Отключаем скролл в окнах "Конфигурация 30.0" и "Склад баек" */
+#modal-tv .modal-body,
+#modal-clapper .modal-body {
+  max-height: none;
+  overflow: visible;
+}
+
+@media (max-width: 600px) {
+  .desktop-icon span {
+    width: 70px;
+  }
 }

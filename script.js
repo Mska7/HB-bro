@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   resizeCanvas();
 
   function randomColor() {
-    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#ff69b4', '#8a2be2'];
+    const colors = ['#ff9999', '#99ff99', '#9999ff', '#ffff99', '#ff99ff', '#99ffff', '#ffcc99', '#ff99cc', '#cc99ff'];
     return colors[Math.floor(Math.random() * colors.length)];
   }
 
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function startConfetti() {
     if (confettiActive) return;
     confettiActive = true;
-    initConfetti(150);
+    initConfetti(70);
     loop();
   }
 
@@ -144,6 +144,87 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalEl) modalEl.style.display = 'none';
   }
 
+  // --- Кастомное модальное окно-уведомление в стиле Windows 95 ---
+  function makeDraggable(element, handle) {
+    if (!handle) return;
+    let isDragging = false;
+    let startX, startY, initialLeft, initialTop;
+
+    handle.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      const rect = element.getBoundingClientRect();
+      initialLeft = rect.left;
+      initialTop = rect.top;
+      element.style.transform = 'none';
+      element.style.left = initialLeft + 'px';
+      element.style.top = initialTop + 'px';
+      document.body.style.userSelect = 'none';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      element.style.left = (initialLeft + dx) + 'px';
+      element.style.top = (initialTop + dy) + 'px';
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        document.body.style.userSelect = '';
+      }
+    });
+  }
+
+  function showWin95Alert(message, title = 'Системное сообщение') {
+    const existing = document.querySelector('.win95-alert');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.className = 'window modal-window win95-alert';
+    modal.innerHTML = `
+      <div class="title-bar modal-title-bar">
+        <div class="title-left">
+          <span class="title-icon">⚠️</span>
+          <span class="title-text">${title}</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn win-close" aria-label="Закрыть">×</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>${message}</p>
+        <button class="retro-button win95-alert-ok">OK</button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    modal.style.display = 'block';
+
+    const closeBtn = modal.querySelector('.win-close');
+    const okBtn = modal.querySelector('.win95-alert-ok');
+
+    function close() {
+      modal.remove();
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (okBtn) okBtn.addEventListener('click', close);
+
+    function onKeyDown(e) {
+      if (e.key === 'Escape') {
+        close();
+        document.removeEventListener('keydown', onKeyDown);
+      }
+    }
+    document.addEventListener('keydown', onKeyDown);
+
+    makeDraggable(modal, modal.querySelector('.title-bar'));
+  }
+
   function toggleFestiveIcons() {
     festiveMode = !festiveMode;
     desktopIcons.forEach((icon) => {
@@ -182,6 +263,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Автоматическая анимация прыжка персонажа-аниматора каждые 5 секунд
+  const mascot = document.querySelector('.mascot');
+  const mascotBubble = document.querySelector('.mascot-bubble');
+  let mascotBubbleTimer = null;
+
+  function showMascotBubble() {
+    if (!mascotBubble) return;
+    mascotBubble.classList.add('show');
+    if (mascotBubbleTimer) clearTimeout(mascotBubbleTimer);
+    mascotBubbleTimer = setTimeout(() => {
+      mascotBubble.classList.remove('show');
+    }, 2000);
+  }
+
+  function triggerMascotJump() {
+    if (!mascot) return;
+    mascot.classList.remove('jump');
+    void mascot.offsetWidth; // перезапуск анимации
+    mascot.classList.add('jump');
+    showMascotBubble();
+  }
+
+  if (mascot) {
+    triggerMascotJump(); // первый прыжок сразу при загрузке
+    setInterval(triggerMascotJump, 5000);
+  }
+
   // Открытие окон по клику на иконки рабочего стола
   desktopIcons.forEach((icon) => {
     icon.addEventListener('click', () => {
@@ -218,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const adultModeBtn = document.getElementById('adult-mode-btn');
   if (adultModeBtn) {
     adultModeBtn.addEventListener('click', () => {
-      alert("Внимание: Режим 'Аниматор' отключен. Включен режим 'Лежание на диване'");
+      showWin95Alert("Внимание: Режим 'Аниматор' отключен. Включен режим 'Лежание на диване'", 'Внимание');
     });
   }
 
